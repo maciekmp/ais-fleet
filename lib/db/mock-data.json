@@ -1,0 +1,326 @@
+{
+  "drones": [
+    {
+      "id": "drone-1",
+      "name": "Drone Alpha-1",
+      "serialNumber": "DRN-001",
+      "status": "active",
+      "firmwareVersion": "3.2.1",
+      "location": {
+        "lat": 40.7128,
+        "lng": -74.006,
+        "address": "New York, NY"
+      },
+      "configuration": {
+        "maxAltitude": 120,
+        "batteryCapacity": 100
+      },
+      "projectId": "project-1",
+      "controlStationId": "control-1",
+      "dockingStationId": "docking-1",
+      "registeredAt": "2025-01-01T00:00:00.000Z",
+      "lastPing": "2025-11-23T15:00:00.000Z",
+      "metadata": {
+        "model": "DJI Phantom 4"
+      }
+    },
+    {
+      "id": "drone-2",
+      "name": "Drone Beta-1",
+      "serialNumber": "DRN-002",
+      "status": "active",
+      "firmwareVersion": "3.1.5",
+      "location": {
+        "lat": 34.0522,
+        "lng": -118.2437,
+        "address": "Los Angeles, CA"
+      },
+      "configuration": {
+        "maxAltitude": 150,
+        "batteryCapacity": 95
+      },
+      "projectId": "project-2",
+      "controlStationId": "control-2",
+      "dockingStationId": null,
+      "registeredAt": "2025-01-01T00:00:00.000Z",
+      "lastPing": "2025-11-23T14:55:00.000Z",
+      "metadata": {
+        "model": "DJI Mavic 3"
+      }
+    },
+    {
+      "id": "drone-3",
+      "name": "Drone Gamma-1",
+      "serialNumber": "DRN-003",
+      "status": "pending",
+      "firmwareVersion": "2.9.0",
+      "location": {
+        "lat": 41.8781,
+        "lng": -87.6298,
+        "address": "Chicago, IL"
+      },
+      "configuration": {
+        "maxAltitude": 100,
+        "batteryCapacity": 80
+      },
+      "projectId": null,
+      "controlStationId": null,
+      "dockingStationId": null,
+      "registeredAt": "2025-11-23T14:50:00.000Z",
+      "lastPing": null,
+      "metadata": {
+        "model": "Autel EVO II"
+      }
+    }
+  ],
+  "controlStations": [
+    {
+      "id": "control-1",
+      "name": "Main Control Center",
+      "identifier": "CTRL-001",
+      "status": "online",
+      "firmwareVersion": "2.1.0",
+      "location": {
+        "lat": 40.7128,
+        "lng": -74.006,
+        "address": "New York, NY"
+      },
+      "configuration": {},
+      "connectedDrones": ["drone-1"],
+      "metadata": {}
+    },
+    {
+      "id": "control-2",
+      "name": "Field Control Station",
+      "identifier": "CTRL-002",
+      "status": "online",
+      "firmwareVersion": "2.0.5",
+      "location": {
+        "lat": 34.0522,
+        "lng": -118.2437,
+        "address": "Los Angeles, CA"
+      },
+      "configuration": {},
+      "connectedDrones": ["drone-2"],
+      "metadata": {}
+    }
+  ],
+  "dockingStations": [
+    {
+      "id": "docking-1",
+      "name": "Dock Alpha",
+      "identifier": "DOCK-001",
+      "status": "available",
+      "firmwareVersion": "1.5.0",
+      "location": {
+        "lat": 40.7128,
+        "lng": -74.006,
+        "address": "New York, NY"
+      },
+      "configuration": {},
+      "connectedDrones": ["drone-1"],
+      "metadata": {}
+    },
+    {
+      "id": "docking-2",
+      "name": "Dock Beta",
+      "identifier": "DOCK-002",
+      "status": "available",
+      "firmwareVersion": "1.5.0",
+      "location": {
+        "lat": 34.0522,
+        "lng": -118.2437,
+        "address": "Los Angeles, CA"
+      },
+      "configuration": {},
+      "connectedDrones": [],
+      "metadata": {}
+    }
+  ],
+  "projects": [
+    {
+      "id": "project-1",
+      "name": "Urban Survey Project",
+      "description": "Surveying urban areas for mapping and analysis",
+      "status": "active",
+      "assignedDrones": ["drone-1"],
+      "assignedUsers": ["user-1", "user-2"],
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-11-23T15:00:00.000Z",
+      "metadata": {}
+    },
+    {
+      "id": "project-2",
+      "name": "Agricultural Monitoring",
+      "description": "Monitoring crop health and growth",
+      "status": "active",
+      "assignedDrones": ["drone-2"],
+      "assignedUsers": ["user-2"],
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-11-23T15:00:00.000Z",
+      "metadata": {}
+    }
+  ],
+  "users": [
+    {
+      "id": "user-1",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "role": "admin",
+      "assignedProjects": ["project-1"],
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "metadata": {}
+    },
+    {
+      "id": "user-2",
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "role": "operator",
+      "assignedProjects": ["project-1", "project-2"],
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "metadata": {}
+    }
+  ],
+  "logs": [
+    {
+      "id": "log-1",
+      "type": "registration",
+      "source": "DRN-001",
+      "message": "Drone registered successfully",
+      "rawMessage": "{\"event\":\"registration\",\"serial\":\"DRN-001\",\"firmware\":\"3.2.1\",\"timestamp\":\"2025-11-23T10:00:00Z\"}",
+      "data": {
+        "serialNumber": "DRN-001",
+        "firmwareVersion": "3.2.1"
+      },
+      "timestamp": "2025-11-23T10:00:00.000Z",
+      "severity": "info"
+    },
+    {
+      "id": "log-2",
+      "type": "ping",
+      "source": "DRN-001",
+      "message": "Heartbeat received from drone",
+      "rawMessage": "{\"event\":\"ping\",\"serial\":\"DRN-001\",\"battery\":85,\"location\":{\"lat\":40.7128,\"lng\":-74.006},\"timestamp\":\"2025-11-23T15:00:00Z\"}",
+      "data": {
+        "battery": 85,
+        "location": {
+          "lat": 40.7128,
+          "lng": -74.006
+        }
+      },
+      "timestamp": "2025-11-23T15:00:00.000Z",
+      "severity": "info"
+    },
+    {
+      "id": "log-3",
+      "type": "status_update",
+      "source": "DRN-002",
+      "message": "Status changed to active",
+      "rawMessage": "{\"event\":\"status_update\",\"serial\":\"DRN-002\",\"status\":\"active\",\"reason\":\"manual_activation\",\"timestamp\":\"2025-11-23T14:55:00Z\"}",
+      "data": {
+        "status": "active",
+        "reason": "manual_activation"
+      },
+      "timestamp": "2025-11-23T14:55:00.000Z",
+      "severity": "info"
+    },
+    {
+      "id": "log-4",
+      "type": "ping",
+      "source": "DRN-002",
+      "message": "Heartbeat received from drone",
+      "rawMessage": "{\"event\":\"ping\",\"serial\":\"DRN-002\",\"battery\":92,\"location\":{\"lat\":34.0522,\"lng\":-118.2437},\"timestamp\":\"2025-11-23T14:55:00Z\"}",
+      "data": {
+        "battery": 92,
+        "location": {
+          "lat": 34.0522,
+          "lng": -118.2437
+        }
+      },
+      "timestamp": "2025-11-23T14:55:00.000Z",
+      "severity": "info"
+    },
+    {
+      "id": "log-5",
+      "type": "system",
+      "source": "system",
+      "message": "Control station CS-001 went offline",
+      "rawMessage": "{\"event\":\"station_offline\",\"station\":\"CS-001\",\"timestamp\":\"2025-11-23T12:00:00Z\"}",
+      "data": {
+        "stationId": "control-1",
+        "reason": "connection_timeout"
+      },
+      "timestamp": "2025-11-23T12:00:00.000Z",
+      "severity": "warning"
+    },
+    {
+      "id": "log-6",
+      "type": "registration",
+      "source": "DRN-003",
+      "message": "New drone registration request",
+      "rawMessage": "{\"event\":\"registration\",\"serial\":\"DRN-003\",\"firmware\":\"2.8.0\",\"timestamp\":\"2025-11-23T08:00:00Z\"}",
+      "data": {
+        "serialNumber": "DRN-003",
+        "firmwareVersion": "2.8.0"
+      },
+      "timestamp": "2025-11-23T08:00:00.000Z",
+      "severity": "info"
+    },
+    {
+      "id": "log-7",
+      "type": "status_update",
+      "source": "DRN-001",
+      "message": "Battery level critical",
+      "rawMessage": "{\"event\":\"status_update\",\"serial\":\"DRN-001\",\"status\":\"maintenance\",\"battery\":15,\"alert\":\"low_battery\",\"timestamp\":\"2025-11-23T09:30:00Z\"}",
+      "data": {
+        "status": "maintenance",
+        "battery": 15,
+        "alert": "low_battery"
+      },
+      "timestamp": "2025-11-23T09:30:00.000Z",
+      "severity": "warning"
+    },
+    {
+      "id": "log-8",
+      "type": "system",
+      "source": "system",
+      "message": "Database backup completed successfully",
+      "rawMessage": "{\"event\":\"backup\",\"status\":\"success\",\"size\":\"2.5MB\",\"timestamp\":\"2025-11-23T06:00:00Z\"}",
+      "data": {
+        "backupSize": "2.5MB",
+        "status": "success"
+      },
+      "timestamp": "2025-11-23T06:00:00.000Z",
+      "severity": "info"
+    },
+    {
+      "id": "log-9",
+      "type": "ping",
+      "source": "DRN-001",
+      "message": "Heartbeat received from drone",
+      "rawMessage": "{\"event\":\"ping\",\"serial\":\"DRN-001\",\"battery\":78,\"location\":{\"lat\":40.7150,\"lng\":-74.0080},\"timestamp\":\"2025-11-23T16:00:00Z\"}",
+      "data": {
+        "battery": 78,
+        "location": {
+          "lat": 40.7150,
+          "lng": -74.0080
+        }
+      },
+      "timestamp": "2025-11-23T16:00:00.000Z",
+      "severity": "info"
+    },
+    {
+      "id": "log-10",
+      "type": "system",
+      "source": "system",
+      "message": "Failed to connect to docking station DS-001",
+      "rawMessage": "{\"event\":\"connection_error\",\"station\":\"DS-001\",\"error\":\"timeout\",\"timestamp\":\"2025-11-23T11:15:00Z\"}",
+      "data": {
+        "stationId": "docking-1",
+        "error": "timeout"
+      },
+      "timestamp": "2025-11-23T11:15:00.000Z",
+      "severity": "error"
+    }
+  ]
+}

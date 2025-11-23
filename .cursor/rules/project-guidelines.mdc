@@ -1,0 +1,108 @@
+---
+name: Next.js 16 App Router - Drone Fleet Management Dashboard
+description: Project structure, conventions, and best practices for the drone fleet management dashboard
+---
+
+# Next.js 16 App Router - Drone Fleet Management Dashboard
+
+## Project Structure
+- Use Next.js 16 App Router with TypeScript
+- Server Components by default (no "use client" unless needed)
+- Root-level `components/` directory (not `_components` unless co-locating with routes)
+- Server Actions in `lib/actions/` with "use server" directive
+- Types defined in `lib/db/types.ts`
+- Mock database in `lib/db/` with JSON persistence
+
+## File Naming Conventions
+- Component files: kebab-case (e.g., `drone-form.tsx`, `stats-card.tsx`)
+- Page files: `page.tsx` (Next.js convention)
+- Route files: `route.ts` (for API routes)
+- Server actions: kebab-case (e.g., `drones.ts`, `projects.ts`)
+- Types: kebab-case (e.g., `types.ts`)
+
+## Component Guidelines
+- **Server Components**: Default for pages in `app/` directory. No directive needed.
+- **Client Components**: Only use "use client" when:
+  - Using React hooks (useState, useEffect, useRouter, etc.)
+  - Handling browser events (onClick, onChange, etc.)
+  - Using client-side libraries
+  - Forms with React Hook Form (all forms are client components)
+- **Forms**: All form components in `components/forms/` are client components using React Hook Form + Zod validation
+- **UI Components**: shadcn/ui components in `components/ui/` - keep as-is, don't modify unless necessary
+
+## Server Actions
+- All server actions in `lib/actions/` must have "use server" directive at the top
+- Always import `@/lib/db/init` at the top to ensure database initialization
+- Use `revalidatePath()` after mutations to update the UI
+- Return error objects with `{ error: string }` format for failures
+- All actions should be async functions
+
+## Data Fetching
+- Fetch data in Server Components using Server Actions from `lib/actions/`
+- Do NOT create API routes for data fetching - use Server Components and Server Actions instead
+- Only use API routes for webhooks (`app/api/webhooks/`)
+
+## Imports
+- Use `@/` path alias for all imports (configured in tsconfig.json)
+- Import order: external packages → internal components → types → utils
+- Example: `import { Button } from "@/components/ui/button";`
+
+## Forms
+- Use React Hook Form with Zod validation
+- Form components accept optional entity prop for edit mode (e.g., `drone?: Drone`)
+- Forms should handle both create and edit modes
+- Use shadcn/ui form components (Input, Select, Label, etc.)
+- Handle null values in Select components (use "none" value, convert to null)
+
+## Database
+- Mock in-memory database with JSON persistence
+- Load initial data from `lib/db/mock-data.json`
+- All CRUD operations in `lib/db/index.ts`
+- Use predefined IDs from JSON when loading mock data
+- Date objects must be properly serialized/deserialized
+
+## Styling
+- Use Tailwind CSS with shadcn/ui components
+- Use `cn()` utility from `@/lib/utils` for conditional classes
+- Follow shadcn/ui design patterns
+- Responsive design: mobile-first approach
+
+## TypeScript
+- Strict mode enabled
+- Define all types in `lib/db/types.ts`
+- Use proper TypeScript types for all props and function parameters
+- Avoid `any` - use proper types or `unknown`
+
+## Next.js Specific
+- Use `next/navigation` for client-side navigation (useRouter, usePathname)
+- Use `next/link` for links
+- Use `headers()` from `next/headers` for server-side header access
+- Use `revalidatePath()` and `revalidateTag()` for cache invalidation
+
+## Error Handling
+- Server Actions return `{ error: string }` on failure
+- Forms display errors using React Hook Form's error state
+- Handle null/undefined values gracefully (especially for dates and optional fields)
+
+## Code Style
+- Use concise, clear variable names
+- Prefer async/await over promises
+- Keep components focused and single-purpose
+- Extract reusable logic into utilities or hooks
+- Use descriptive function and component names
+
+## Testing & Development
+- Ensure database initialization happens before any data operations
+- Use global flags to prevent duplicate database loading
+- Handle edge cases (empty states, null values, missing data)
+
+## Webhooks
+- Webhook endpoints in `app/api/webhooks/`
+- Accept POST requests with JSON body
+- Create logs for all webhook events
+- Return appropriate HTTP status codes and error messages
+- New drone registrations default to "pending" status
+
+## Commit Messages
+- Use concise, descriptive commit messages
+- Few words, clear intent
