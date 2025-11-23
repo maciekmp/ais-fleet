@@ -23,6 +23,11 @@ export async function createDockingStation(data: {
   configuration?: Record<string, unknown>;
   metadata?: Record<string, unknown>;
 }) {
+  const existing = db.findDockingStationByIdentifier(data.identifier);
+  if (existing) {
+    return { error: "Docking station with this identifier already exists" };
+  }
+
   const station = db.createDockingStation({
     ...data,
     configuration: data.configuration || {},

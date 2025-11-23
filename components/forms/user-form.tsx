@@ -63,11 +63,13 @@ export function UserForm({ user }: UserFormProps) {
           role: data.role,
         });
 
-        if (result.success && result.user) {
+        if ("error" in result && result.error) {
+          setError(result.error);
+        } else if (result.success && result.user) {
           router.push(`/users/${result.user.id}`);
           router.refresh();
         } else {
-          setError(result.error || "Failed to create user");
+          setError("Failed to create user");
         }
       }
     } catch (err) {

@@ -23,6 +23,11 @@ export async function createControlStation(data: {
   configuration?: Record<string, unknown>;
   metadata?: Record<string, unknown>;
 }) {
+  const existing = db.findControlStationByIdentifier(data.identifier);
+  if (existing) {
+    return { error: "Control station with this identifier already exists" };
+  }
+
   const station = db.createControlStation({
     ...data,
     configuration: data.configuration || {},

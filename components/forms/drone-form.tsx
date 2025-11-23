@@ -121,7 +121,11 @@ export function DroneForm({ drone, projects, controlStations, dockingStations }:
           router.push(`/drones/${result.drone.id}`);
           router.refresh();
         } else {
-          setError(result.error || "Failed to create drone");
+          if ("error" in result && result.error) {
+            setError(result.error);
+          } else {
+            setError("Failed to create drone");
+          }
         }
       }
     } catch (err) {

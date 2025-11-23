@@ -1,4 +1,3 @@
-import type { Database } from "./index";
 import { db } from "./index";
 
 export function seedDatabase() {

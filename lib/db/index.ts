@@ -76,6 +76,12 @@ class Database {
     return Array.from(this.controlStations.values());
   }
 
+  findControlStationByIdentifier(identifier: string): ControlStation | undefined {
+    return Array.from(this.controlStations.values()).find(
+      (s) => s.identifier === identifier
+    );
+  }
+
   updateControlStation(
     id: string,
     updates: Partial<ControlStation>
@@ -113,6 +119,12 @@ class Database {
     return Array.from(this.dockingStations.values());
   }
 
+  findDockingStationByIdentifier(identifier: string): DockingStation | undefined {
+    return Array.from(this.dockingStations.values()).find(
+      (s) => s.identifier === identifier
+    );
+  }
+
   updateDockingStation(
     id: string,
     updates: Partial<DockingStation>
@@ -148,6 +160,12 @@ class Database {
 
   getAllProjects(): Project[] {
     return Array.from(this.projects.values());
+  }
+
+  findProjectByName(name: string): Project | undefined {
+    return Array.from(this.projects.values()).find(
+      (p) => p.name === name
+    );
   }
 
   updateProject(id: string, updates: Partial<Project>): Project | null {

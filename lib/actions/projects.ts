@@ -20,6 +20,11 @@ export async function createProject(data: {
   status: ProjectStatus;
   metadata?: Record<string, unknown>;
 }) {
+  const existing = db.findProjectByName(data.name);
+  if (existing) {
+    return { error: "Project with this name already exists" };
+  }
+
   const project = db.createProject({
     ...data,
     metadata: data.metadata || {},

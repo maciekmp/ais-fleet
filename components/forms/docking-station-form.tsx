@@ -83,11 +83,13 @@ export function DockingStationForm({ station }: DockingStationFormProps) {
           },
         });
 
-        if (result.success && result.station) {
+        if ("error" in result && result.error) {
+          setError(result.error);
+        } else if (result.success && result.station) {
           router.push(`/docking-stations/${result.station.id}`);
           router.refresh();
         } else {
-          setError(result.error || "Failed to create docking station");
+          setError("Failed to create docking station");
         }
       }
     } catch (err) {

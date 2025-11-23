@@ -83,11 +83,13 @@ export function ControlStationForm({ station }: ControlStationFormProps) {
           },
         });
 
-        if (result.success && result.station) {
+        if ("error" in result && result.error) {
+          setError(result.error);
+        } else if (result.success && result.station) {
           router.push(`/control-stations/${result.station.id}`);
           router.refresh();
         } else {
-          setError(result.error || "Failed to create control station");
+          setError("Failed to create control station");
         }
       }
     } catch (err) {

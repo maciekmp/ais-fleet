@@ -90,7 +90,9 @@ export function ProjectForm({ project, drones, users }: ProjectFormProps) {
           status: data.status,
         });
 
-        if (result.success && result.project) {
+        if ("error" in result && result.error) {
+          setError(result.error);
+        } else if (result.success && result.project) {
           // Assign users if provided
           for (const userId of data.assignedUsers) {
             await assignUserToProject(userId, result.project.id);
@@ -99,7 +101,7 @@ export function ProjectForm({ project, drones, users }: ProjectFormProps) {
           router.push(`/projects/${result.project.id}`);
           router.refresh();
         } else {
-          setError(result.error || "Failed to create project");
+          setError("Failed to create project");
         }
       }
     } catch (err) {
