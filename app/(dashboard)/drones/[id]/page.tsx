@@ -3,6 +3,7 @@ import { getProjects } from "@/lib/actions/projects";
 import { getControlStations } from "@/lib/actions/control-stations";
 import { getDockingStations } from "@/lib/actions/docking-stations";
 import { DroneForm } from "@/components/forms/drone-form";
+import { DroneMapWrapper } from "@/components/dashboard/drone-map-wrapper";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -40,19 +41,25 @@ export default async function DroneDetailPage({
         </div>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Edit Drone</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <DroneForm
-            drone={drone}
-            projects={projects}
-            controlStations={controlStations}
-            dockingStations={dockingStations}
-          />
-        </CardContent>
-      </Card>
+      <div className="grid gap-6 md:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle>Edit Drone</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <DroneForm
+              drone={drone}
+              projects={projects}
+              controlStations={controlStations}
+              dockingStations={dockingStations}
+            />
+          </CardContent>
+        </Card>
+
+        <Card className="p-0 overflow-hidden h-full min-h-[400px]">
+          <DroneMapWrapper location={drone.location} droneName={drone.name} />
+        </Card>
+      </div>
     </div>
   );
 }
